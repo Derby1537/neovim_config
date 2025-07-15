@@ -55,5 +55,6 @@ vim.api.nvim_set_keymap("v", "<C-S-j>", ":copy .", {
 vim.o.signcolumn = "yes"
 vim.g.mapleader = " "
 vim.o.colorcolumn = "80"
+vim.opt.termguicolors = true
 
 require("config.lazy")
