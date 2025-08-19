@@ -13,6 +13,7 @@ return {
             vim.keymap.set("n", "<leader>fb", builtin.buffers, { desc = "Telescope buffers" })
             vim.keymap.set("n", "<leader>fh", builtin.help_tags, { desc = "Telescope help tags" })
             vim.keymap.set("n", "<leader>fu", "<cmd>Telescope undo<cr>", { desc = "Telescope undo" })
+            vim.keymap.set("n", "<leader>fy", "<cmd>Telescope neoclip<cr>", { desc = "Telescope neoclip" })
             vim.keymap.set("n", "<leader>b", ":bn<CR>", { desc = "next buffer" })
         end,
     },
@@ -35,4 +36,15 @@ return {
             require("telescope").load_extension("undo")
         end,
     },
+    {
+        "AckslD/nvim-neoclip.lua",
+        dependencies = {
+            -- you'll need at least one of these
+            {'nvim-telescope/telescope.nvim'},
+            {'ibhagwan/fzf-lua'},
+        },
+        config = function()
+            require('neoclip').setup()
+        end,
+    }
 }
