@@ -18,7 +18,7 @@ return {
             "mason-org/mason.nvim",
             "neovim/nvim-lspconfig",
         },
-        config = function ()
+        config = function()
             require("mason-lspconfig").setup {
                 automatic_enable = false
             }
@@ -29,66 +29,73 @@ return {
         dependencies = { "mason-org/mason.nvim" },
         config = function()
             local capabilities = require("cmp_nvim_lsp").default_capabilities()
-            local lspconfig = require("lspconfig")
 
+            -- Keymaps globali LSP
             vim.keymap.set("n", "K", vim.lsp.buf.hover, { desc = "Open documentation" })
             vim.keymap.set("n", "<leader>gd", vim.lsp.buf.definition, { desc = "Go to Definition" })
             vim.keymap.set({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, { desc = "Code Action" })
 
-            lspconfig.clangd.setup({
-                cmd = {
-                    "clangd",
-                    "--compile-commands-dir=.",
-                    "--fallback-style=webkit",
-                },
-                root_dir = function()
-                    return vim.loop.cwd()
-                end,
+            -- clangd
+            vim.lsp.config.clangd = {
+                cmd = { "clangd", "--compile-commands-dir=.", "--fallback-style=webkit" },
+                root_dir = vim.uv.cwd,
                 capabilities = capabilities,
-            })
-            lspconfig.lua_ls.setup({
+            }
+            vim.lsp.start(vim.lsp.config.clangd)
+
+            -- lua_ls
+            vim.lsp.config.lua_ls = {
+                cmd = { "lua-language-server" },
                 capabilities = capabilities,
-            })
-            lspconfig.ts_ls.setup({
+            }
+            vim.lsp.start(vim.lsp.config.lua_ls)
+
+            -- tsserver
+            vim.lsp.config.tsserver = {
+                cmd = { "typescript-language-server", "--stdio" },
                 capabilities = capabilities,
-            })
-            lspconfig.java_language_server.setup({
+            }
+            vim.lsp.start(vim.lsp.config.tsserver)
+
+            -- Java (jdtls)
+            vim.lsp.config.jdtls = {
+                cmd = { "jdtls" },
                 capabilities = capabilities,
-            })
-            lspconfig.cssls.setup({
+            }
+            vim.lsp.start(vim.lsp.config.jdtls)
+
+            -- cssls
+            vim.lsp.config.cssls = {
+                cmd = { "vscode-css-language-server", "--stdio" },
                 capabilities = capabilities,
-            })
-            lspconfig.dartls.setup({
+            }
+            vim.lsp.start(vim.lsp.config.cssls)
+
+            -- dartls
+            vim.lsp.config.dartls = {
+                cmd = { "dart", "language-server", "--protocol=lsp" },
                 capabilities = capabilities,
-                cmd = { "dart", "language-server", "--protocol=lsp" },  -- Comando per avviare il server Dart
                 init_options = {
-                    closingLabels = true,  -- Mostra etichette di chiusura per i widget Flutter
-                    flutterOutline = true,  -- Abilita l'outline di Flutter
-                    onlyAnalyzeProjectsWithOpenFiles = true,  -- Analizza solo i progetti con file aperti
-                    suggestFromUnimportedLibraries = true,  -- Suggerisci simboli da librerie non importate
+                    closingLabels = true,
+                    flutterOutline = true,
+                    onlyAnalyzeProjectsWithOpenFiles = true,
+                    suggestFromUnimportedLibraries = true,
                 },
                 settings = {
                     dart = {
-                        completeFunctionCalls = true,  -- Completa automaticamente le chiamate di funzione
-                        showTodos = true,              -- Mostra i TODO nel codice
-                        lineLength = 80,               -- Lunghezza massima della linea per la formattazione
+                        completeFunctionCalls = true,
+                        showTodos = true,
+                        lineLength = 80,
                     },
                 },
-            })
-
-            -- require("mason-lspconfig").setup_handlers({
-            --     function(server_name)
-            --         lspconfig[server_name].setup({
-            --             capabilities = capabilities,
-            --         })
-            --     end,
-            -- })
-
+            }
+            vim.lsp.start(vim.lsp.config.dartls)
         end,
     },
     {
         'mrcjkb/rustaceanvim',
-        version = '^5', -- Recommended
-        lazy = false, -- This plugin is already lazy
+        version = '^5',
+        lazy = false,
     },
 }
+
