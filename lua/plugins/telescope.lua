@@ -31,6 +31,11 @@ return {
 
                     }
                 },
+                pickers = {
+                    colorscheme = {
+                        enable_preview = true
+                    }
+                }
             })
             require("telescope").load_extension("ui-select")
             require("telescope").load_extension("undo")

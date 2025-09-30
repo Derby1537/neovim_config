@@ -11,7 +11,7 @@ vim.opt.scrolloff = 8
 -- vim.opt.foldnestmax = 1
 vim.opt.cursorline = true
 vim.opt.showmatch = true
-vim.cmd.colorscheme("gruvbox")
+vim.cmd.colorscheme("catppuccin-frappe")
 vim.api.nvim_set_keymap("i", "jk", "<Esc>", {
     noremap = true,
     silent = true,
