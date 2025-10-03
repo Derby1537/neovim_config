@@ -35,6 +35,15 @@ return {
                     colorscheme = {
                         enable_preview = true
                     }
+                },
+                defaults = {
+                    file_ignore_patterns = {
+                        "node_modules",
+                        ".git",
+                        "dist",
+                        "build",
+                        "migration"
+                    }
                 }
             })
             require("telescope").load_extension("ui-select")

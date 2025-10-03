@@ -38,7 +38,7 @@ return {
             lspconfig.clangd.setup({
                 cmd = {
                     "clangd",
-                    "--compile-commands-dir=.",
+                    "--compile-commands-dir=./Debug",
                     "--fallback-style=webkit",
                 },
                 root_dir = function()
