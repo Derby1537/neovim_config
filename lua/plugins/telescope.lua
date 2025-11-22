@@ -14,7 +14,9 @@ return {
             vim.keymap.set("n", "<leader>fh", builtin.help_tags, { desc = "Telescope help tags" })
             vim.keymap.set("n", "<leader>fu", "<cmd>Telescope undo<cr>", { desc = "Telescope undo" })
             vim.keymap.set("n", "<leader>fy", "<cmd>Telescope neoclip<cr>", { desc = "Telescope neoclip" })
-            vim.keymap.set("n", "<leader>b", ":bn<CR>", { desc = "next buffer" })
+            vim.keymap.set("n", "<leader>n", ":bn<CR>", { desc = "next buffer" })
+            vim.keymap.set("n", "<leader>p", ":bp<CR>", { desc = "previous buffer" })
+            vim.keymap.set("n", "<leader>d", ":bd<CR>", { desc = "close current buffer" })
         end,
     },
     {
