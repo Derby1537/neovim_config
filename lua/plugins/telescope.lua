@@ -17,6 +17,11 @@ return {
             vim.keymap.set("n", "<leader>n", ":bn<CR>", { desc = "next buffer" })
             vim.keymap.set("n", "<leader>p", ":bp<CR>", { desc = "previous buffer" })
             vim.keymap.set("n", "<leader>d", ":bd<CR>", { desc = "close current buffer" })
+            vim.keymap.set("n", "<leader>fr", function()
+                require("telescope.builtin").lsp_references({
+                    include_declaration = false,
+                })
+            end, { desc = "Telescope LSP references (word under cursor)" })
         end,
     },
     {
@@ -29,14 +34,12 @@ return {
                             -- even more opts
                         }),
                     },
-                    ["undo"] = {
-
-                    }
+                    ["undo"] = {},
                 },
                 pickers = {
                     colorscheme = {
-                        enable_preview = true
-                    }
+                        enable_preview = true,
+                    },
                 },
                 defaults = {
                     file_ignore_patterns = {
@@ -44,9 +47,9 @@ return {
                         ".git",
                         "dist",
                         "build",
-                        "migration"
-                    }
-                }
+                        "migration",
+                    },
+                },
             })
             require("telescope").load_extension("ui-select")
             require("telescope").load_extension("undo")
@@ -56,11 +59,11 @@ return {
         "AckslD/nvim-neoclip.lua",
         dependencies = {
             -- you'll need at least one of these
-            {'nvim-telescope/telescope.nvim'},
-            {'ibhagwan/fzf-lua'},
+            { "nvim-telescope/telescope.nvim" },
+            { "ibhagwan/fzf-lua" },
         },
         config = function()
-            require('neoclip').setup()
+            require("neoclip").setup()
         end,
-    }
+    },
 }

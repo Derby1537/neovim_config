@@ -52,9 +52,43 @@ vim.api.nvim_set_keymap("v", "<C-S-j>", ":copy .", {
     noremap = true,
     desc = "copy and paste current line below"
 })
+
+-- Disable arrows
+vim.keymap.set({ "n", "i" }, "<Up>", "<Nop>")
+vim.keymap.set({ "n", "i" }, "<Down>", "<Nop>")
+vim.keymap.set({ "n", "i" }, "<Left>", "<Nop>")
+vim.keymap.set({ "n", "i" }, "<Right>", "<Nop>")
+
+-- Disable mouse
+vim.opt.mouse = "a"
+vim.keymap.set({ "n", "i", "v" }, "<ScrollWheelUp>", "<Nop>")
+vim.keymap.set({ "n", "i", "v" }, "<ScrollWheelDown>", "<Nop>")
+vim.keymap.set({ "n", "i", "v" }, "<ScrollWheelLeft>", "<Nop>")
+vim.keymap.set({ "n", "i", "v" }, "<ScrollWheelRight>", "<Nop>")
+vim.keymap.set({ "n", "i", "v" }, "<LeftMouse>", "<Nop>")
+vim.keymap.set({ "n", "i", "v" }, "<RightMouse>", "<Nop>")
+vim.keymap.set({ "n", "i", "v" }, "<MiddleMouse>", "<Nop>")
+
 vim.o.signcolumn = "yes"
 vim.g.mapleader = " "
 vim.o.colorcolumn = "80"
 vim.opt.termguicolors = true
+
+vim.g.rustaceanvim = {
+    server = {
+        cmd = function()
+            local mason_registry = require('mason-registry')
+            if mason_registry.is_installed('rust-analyzer') then
+                -- This may need to be tweaked depending on the operating system.
+                local ra = mason_registry.get_package('rust-analyzer')
+                local ra_filename = ra:get_receipt():get().links.bin['rust-analyzer']
+                return { ('%s/%s'):format(ra:get_install_path(), ra_filename or 'rust-analyzer') }
+            else
+                -- global installation
+                return { 'rust-analyzer' }
+            end
+        end,
+    },
+}
 
 require("config.lazy")

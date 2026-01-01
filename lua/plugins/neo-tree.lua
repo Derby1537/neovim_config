@@ -15,6 +15,6 @@ return {
 				statusline = "", -- Disables the status line in Neo-tree
 			},
 		})
-		vim.keymap.set("n", "<C-n>", ":Neotree filesystem reveal left<CR>", { desc = "Toggle neo-tree" })
+		vim.keymap.set("n", "<C-n>", ":Neotree filesystem reveal right<CR>", { desc = "Toggle neo-tree" })
 	end,
 }

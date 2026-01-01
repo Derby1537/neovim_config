@@ -6,10 +6,10 @@ return {
                 icons = {
                     package_installed = "✓",
                     package_pending = "➜",
-                    package_uninstalled = "✗"
-                }
-            }
-        }
+                    package_uninstalled = "✗",
+                },
+            },
+        },
     },
     {
         "mason-org/mason-lspconfig.nvim",
@@ -18,11 +18,11 @@ return {
             "mason-org/mason.nvim",
             "neovim/nvim-lspconfig",
         },
-        config = function ()
-            require("mason-lspconfig").setup {
-                automatic_enable = false
-            }
-        end
+        config = function()
+            require("mason-lspconfig").setup({
+                automatic_enable = false,
+            })
+        end,
     },
     {
         "neovim/nvim-lspconfig",
@@ -38,7 +38,7 @@ return {
             lspconfig.clangd.setup({
                 cmd = {
                     "clangd",
-                    "--compile-commands-dir=./Debug",
+                    "--compile-commands-dir=.",
                     "--fallback-style=webkit",
                 },
                 root_dir = function()
@@ -58,20 +58,35 @@ return {
             lspconfig.cssls.setup({
                 capabilities = capabilities,
             })
+            -- lspconfig.rust_analyzer.setup({
+            --     capabilities = capabilities,
+            -- })
             lspconfig.dartls.setup({
                 capabilities = capabilities,
-                cmd = { "dart", "language-server", "--protocol=lsp" },  -- Comando per avviare il server Dart
+                cmd = { "dart", "language-server", "--protocol=lsp" }, -- Comando per avviare il server Dart
                 init_options = {
-                    closingLabels = true,  -- Mostra etichette di chiusura per i widget Flutter
-                    flutterOutline = true,  -- Abilita l'outline di Flutter
-                    onlyAnalyzeProjectsWithOpenFiles = true,  -- Analizza solo i progetti con file aperti
-                    suggestFromUnimportedLibraries = true,  -- Suggerisci simboli da librerie non importate
+                    closingLabels = true,                  -- Mostra etichette di chiusura per i widget Flutter
+                    flutterOutline = true,                 -- Abilita l'outline di Flutter
+                    onlyAnalyzeProjectsWithOpenFiles = true, -- Analizza solo i progetti con file aperti
+                    suggestFromUnimportedLibraries = true, -- Suggerisci simboli da librerie non importate
                 },
                 settings = {
                     dart = {
-                        completeFunctionCalls = true,  -- Completa automaticamente le chiamate di funzione
-                        showTodos = true,              -- Mostra i TODO nel codice
-                        lineLength = 80,               -- Lunghezza massima della linea per la formattazione
+                        completeFunctionCalls = true, -- Completa automaticamente le chiamate di funzione
+                        showTodos = true, -- Mostra i TODO nel codice
+                        lineLength = 80, -- Lunghezza massima della linea per la formattazione
+                    },
+                },
+            })
+            lspconfig.pyright.setup({
+                capabilities = capabilities,
+                settings = {
+                    python = {
+                        analysis = {
+                            typeCheckingMode = "basic", -- oppure "strict"
+                            autoSearchPaths = true,
+                            useLibraryCodeForTypes = true,
+                        },
                     },
                 },
             })
@@ -83,12 +98,37 @@ return {
             --         })
             --     end,
             -- })
-
         end,
     },
     {
-        'mrcjkb/rustaceanvim',
-        version = '^5', -- Recommended
+        "mrcjkb/rustaceanvim",
+        version = "^5", -- Recommended
         lazy = false, -- This plugin is already lazy
+    },
+    {
+        "stevearc/conform.nvim",
+        config = function()
+            require("conform").setup({
+                formatters_by_ft = {
+                    javascript = { "prettier" },
+                    typescript = { "prettier" },
+                    javascriptreact = { "prettier" },
+                    typescriptreact = { "prettier" },
+                    css = { "prettier" },
+                    html = { "prettier" },
+                    json = { "prettier" },
+                    yaml = { "prettier" },
+                    markdown = { "prettier" },
+                },
+            })
+
+            vim.keymap.set("n", "<leader>fm", function()
+                require("conform").format({ async = true, lsp_fallback = true })
+            end, { desc = "Format file" })
+
+            vim.keymap.set("v", "<leader>fm", function()
+                require("conform").format({ async = true, lsp_fallback = true })
+            end, { desc = "Format selection" })
+        end,
     },
 }
