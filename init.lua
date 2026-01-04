@@ -13,45 +13,49 @@ vim.opt.scrolloff = 8
 vim.opt.cursorline = true
 vim.opt.showmatch = true
 vim.cmd.colorscheme("catppuccin-frappe")
+vim.o.signcolumn = "yes"
+vim.o.colorcolumn = "80"
+vim.opt.termguicolors = true
+
 vim.api.nvim_set_keymap("i", "jk", "<Esc>", {
-    noremap = true,
-    silent = true,
-    desc = "Exit insert mode"
+	noremap = true,
+	silent = true,
+	desc = "Exit insert mode",
 })
 vim.api.nvim_set_keymap("t", "jk", "<C-\\><C-n>", {
-    noremap = true,
-    silent = true,
-    desc = "Exit insert mode while in terminal"
+	noremap = true,
+	silent = true,
+	desc = "Exit insert mode while in terminal",
 })
 vim.api.nvim_set_keymap("n", "<C-k>", ":m .-2<CR>==", {
-    noremap = true,
-    silent = true,
-    desc = "Move current line up one line"
+	noremap = true,
+	silent = true,
+	desc = "Move current line up one line",
 })
 vim.api.nvim_set_keymap("n", "<C-j>", ":m .+1<CR>==", {
-    noremap = true,
-    silent = true,
-    desc = "Move current line down one line"
+	noremap = true,
+	silent = true,
+	desc = "Move current line down one line",
 })
 vim.api.nvim_set_keymap("v", "<C-k>", ":m '<-2<CR>gv=gv", {
-    noremap = true,
-    silent = true,
-    desc = "Move current selected lines up one line"
+	noremap = true,
+	silent = true,
+	desc = "Move current selected lines up one line",
 })
 vim.api.nvim_set_keymap("v", "<C-j>", ":m '>+1<CR>gv=gv", {
-    noremap = true,
-    silent = true,
-    desc = "Move current selected lines down one line"
+	noremap = true,
+	silent = true,
+	desc = "Move current selected lines down one line",
 })
 vim.api.nvim_set_keymap("n", "<C-S-k>", "yyP", {
-    desc = "Copy and paste current line above"
+	desc = "Copy and paste current line above",
 })
 vim.api.nvim_set_keymap("n", "<C-S-j>", "yyp", {
-    desc = "Copy and paste current line below"
+	desc = "Copy and paste current line below",
 })
 vim.api.nvim_set_keymap("v", "<C-S-j>", ":copy .", {
-    noremap = true,
-    desc = "copy and paste current line below"
+	noremap = true,
+	desc = "copy and paste current line below",
 })
 
 -- Disable arrows
@@ -73,25 +77,32 @@ vim.keymap.set({ "n", "i", "v" }, "<MiddleMouse>", "<Nop>")
 vim.keymap.set("n", "<Esc>", "<cmd>nohlsearch<CR>")
 vim.keymap.set("n", "<leader>e", vim.diagnostic.open_float, { desc = "Show diagnostic [E]rror messages" })
 
-vim.o.signcolumn = "yes"
-vim.o.colorcolumn = "80"
-vim.opt.termguicolors = true
+-- Highlight when yanking (copying) text
+--  Try it with `yap` in normal mode
+--  See `:help vim.hl.on_yank()`
+vim.api.nvim_create_autocmd("TextYankPost", {
+	desc = "Highlight when yanking (copying) text",
+	group = vim.api.nvim_create_augroup("kickstart-highlight-yank", { clear = true }),
+	callback = function()
+		vim.hl.on_yank()
+	end,
+})
 
 vim.g.rustaceanvim = {
-    server = {
-        cmd = function()
-            local mason_registry = require('mason-registry')
-            if mason_registry.is_installed('rust-analyzer') then
-                -- This may need to be tweaked depending on the operating system.
-                local ra = mason_registry.get_package('rust-analyzer')
-                local ra_filename = ra:get_receipt():get().links.bin['rust-analyzer']
-                return { ('%s/%s'):format(ra:get_install_path(), ra_filename or 'rust-analyzer') }
-            else
-                -- global installation
-                return { 'rust-analyzer' }
-            end
-        end,
-    },
+	server = {
+		cmd = function()
+			local mason_registry = require("mason-registry")
+			if mason_registry.is_installed("rust-analyzer") then
+				-- This may need to be tweaked depending on the operating system.
+				local ra = mason_registry.get_package("rust-analyzer")
+				local ra_filename = ra:get_receipt():get().links.bin["rust-analyzer"]
+				return { ("%s/%s"):format(ra:get_install_path(), ra_filename or "rust-analyzer") }
+			else
+				-- global installation
+				return { "rust-analyzer" }
+			end
+		end,
+	},
 }
 
 require("config.lazy")
