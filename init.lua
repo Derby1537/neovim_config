@@ -1,3 +1,4 @@
+vim.g.mapleader = " "
 vim.opt.number = true
 vim.opt.relativenumber = true
 vim.opt.tabstop = 4
@@ -69,8 +70,10 @@ vim.keymap.set({ "n", "i", "v" }, "<LeftMouse>", "<Nop>")
 vim.keymap.set({ "n", "i", "v" }, "<RightMouse>", "<Nop>")
 vim.keymap.set({ "n", "i", "v" }, "<MiddleMouse>", "<Nop>")
 
+vim.keymap.set("n", "<Esc>", "<cmd>nohlsearch<CR>")
+vim.keymap.set("n", "<leader>e", vim.diagnostic.open_float, { desc = "Show diagnostic [E]rror messages" })
+
 vim.o.signcolumn = "yes"
-vim.g.mapleader = " "
 vim.o.colorcolumn = "80"
 vim.opt.termguicolors = true
 
