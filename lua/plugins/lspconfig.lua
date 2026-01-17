@@ -82,6 +82,8 @@ return {
                 capabilities = capabilities,
                 settings = {
                     python = {
+                        venvPath = vim.fn.getcwd(),
+                        venv = "venv",
                         analysis = {
                             typeCheckingMode = "basic", -- oppure "strict"
                             autoSearchPaths = true,
