@@ -86,8 +86,8 @@ return {
 					{ name = "nvim_lsp" },
 					{ name = "luasnip" }, -- For luasnip users.
 				}, {
-						{ name = "buffer" },
-					}),
+					{ name = "buffer" },
+				}),
 				formatting = {
 					fields = { "kind", "abbr", "menu" },
 
@@ -98,7 +98,9 @@ return {
 						-- vim_item.kind_hl_group = ("%sIcon"):format(kind_hl_group)
 						vim_item.kind_hl_group = kind_hl_group
 						-- vim_item.kind = (" %s "):format(lspkind.symbolic)
-						vim_item.kind = (" %s "):format(lspkind.symbolic(vim_item.kind, { mode = "symbol" }))
+						-- vim_item.kind = (" %s "):format(lspkind.symbolic(vim_item.kind, { mode = "symbol" }))
+						local ok, symbol = pcall(lspkind.symbolic, vim_item.kind, { mode = "symbol" })
+						vim_item.kind = ok and symbol and (" %s "):format(symbol) or ""
 
 						local source = entry.source.name
 						if source == "nvim_lsp" or source == "path" then
@@ -122,13 +124,11 @@ return {
 							vim_item.abbr = ("%s "):format(vim_item.abbr)
 						end
 
-
 						local highlights_info = require("colorful-menu").cmp_highlights(entry)
 						if highlights_info ~= nil then
 							vim_item.abbr_hl_group = highlights_info.highlights
 							vim_item.abbr = highlights_info.text
 							-- vim_item.kind_hl_group = highlights_info.highlights
-
 						end
 
 						return vim_item
@@ -163,5 +163,5 @@ return {
 			require("lsp_signature").setup(opts)
 		end,
 	},
-	{ "folke/neodev.nvim", opts = {} }
+	{ "folke/neodev.nvim", opts = {} },
 }
