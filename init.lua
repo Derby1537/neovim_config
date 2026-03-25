@@ -76,6 +76,7 @@ vim.keymap.set({ "n", "i", "v" }, "<MiddleMouse>", "<Nop>")
 
 vim.keymap.set("n", "<Esc>", "<cmd>nohlsearch<CR>")
 vim.keymap.set("n", "<leader>e", vim.diagnostic.open_float, { desc = "Show diagnostic [E]rror messages" })
+vim.keymap.set("n", "<leader>w", "<C-w>w")
 
 -- Highlight when yanking (copying) text
 --  Try it with `yap` in normal mode
