@@ -56,6 +56,19 @@ return {
         end,
     },
     {
+        "ibhagwan/fzf-lua",
+        config = function()
+            require("fzf-lua").setup({
+                keymap = {
+                    fzf = {
+                        ["tab"] = "down",
+                        ["btab"] = "up",
+                    },
+                },
+            })
+        end,
+    },
+    {
         "AckslD/nvim-neoclip.lua",
         dependencies = {
             -- you'll need at least one of these
