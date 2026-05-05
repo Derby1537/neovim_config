@@ -37,12 +37,9 @@ return {
             vim.lsp.config("clangd", {
                 cmd = {
                     "clangd",
-                    "--compile-commands-dir=.",
-                    "--fallback-style=webkit",
+                    "--fallback-style=Google",
+                    "--query-driver=/opt/homebrew/bin/g++-15",
                 },
-                root_dir = function()
-                    return vim.loop.cwd()
-                end,
                 capabilities = capabilities,
             })
             vim.lsp.config("lua_ls", { capabilities = capabilities })
@@ -102,6 +99,11 @@ return {
         "stevearc/conform.nvim",
         config = function()
             require("conform").setup({
+                formatters = {
+                    prettier = {
+                        prepend_args = { "--tab-width", "4" },
+                    },
+                },
                 formatters_by_ft = {
                     javascript = { "prettier" },
                     typescript = { "prettier" },
