@@ -12,7 +12,7 @@ return {
                 null_ls.builtins.formatting.black,
                 null_ls.builtins.formatting.isort,
 				null_ls.builtins.formatting.clang_format.with({
-					extra_args = { "--style", "{IndentWidth: 4}" },
+					extra_args = { "--style", "{IndentWidth: 4, AccessModifierOffset: -4}" },
 				}),
                 null_ls.builtins.diagnostics.rubocop,
 			},
