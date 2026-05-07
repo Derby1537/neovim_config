@@ -123,4 +123,11 @@ vim.g.rustaceanvim = {
 	},
 }
 
+-- Treesitter highlighting nativo (senza nvim-treesitter)
+vim.api.nvim_create_autocmd("FileType", {
+	callback = function(ev)
+		pcall(vim.treesitter.start, ev.buf)
+	end,
+})
+
 require("config.lazy")
