@@ -79,6 +79,8 @@ return {
                 },
             })
 
+            vim.lsp.config("prismals", { capabilities = capabilities })
+
             vim.lsp.enable({
                 "clangd",
                 "lua_ls",
@@ -87,6 +89,7 @@ return {
                 "cssls",
                 "dartls",
                 "pyright",
+                "prismals",
             })
         end,
     },
