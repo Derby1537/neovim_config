@@ -9,12 +9,24 @@ return {
 	config = function()
 		require("neo-tree").setup({
 			window = {
-				width = 30, -- Adjust this value to set your desired width
+				position = "float",
+				popup = {
+					size = { height = "80%", width = "50%" },
+					position = "50%",
+					border = {
+						style = "rounded",
+						highlight = "NeoTreeFloatBorder",
+					},
+				},
 			},
 			win_options = {
-				statusline = "", -- Disables the status line in Neo-tree
+				statusline = "",
+				winblend = 0,
+				winhighlight = "Normal:NeoTreeNormal,NormalFloat:NeoTreeNormal,FloatBorder:NeoTreeFloatBorder",
 			},
 		})
-		vim.keymap.set("n", "<C-n>", ":Neotree filesystem reveal right<CR>", { desc = "Toggle neo-tree" })
+		vim.api.nvim_set_hl(0, "NeoTreeNormal", { link = "NormalFloat" })
+		vim.api.nvim_set_hl(0, "NeoTreeFloatBorder", { link = "FloatBorder" })
+		vim.keymap.set("n", "<C-n>", ":Neotree float reveal<CR>", { desc = "Toggle neo-tree float" })
 	end,
 }
