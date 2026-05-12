@@ -17,6 +17,12 @@ return {
             vim.keymap.set("n", "<leader>n", ":bn<CR>", { desc = "next buffer" })
             vim.keymap.set("n", "<leader>p", ":bp<CR>", { desc = "previous buffer" })
             vim.keymap.set("n", "<leader>d", ":bd<CR>", { desc = "close current buffer" })
+            vim.keymap.set("n", "<leader>fe", function()
+                require("telescope").extensions.file_browser.file_browser({
+                    path = "%:p:h",
+                    select_buffer = true,
+                })
+            end, { desc = "Telescope file explorer" })
             vim.keymap.set("n", "<leader>fr", function()
                 require("telescope.builtin").lsp_references({
                     include_declaration = false,
@@ -26,6 +32,9 @@ return {
     },
     {
         "nvim-telescope/telescope-ui-select.nvim",
+        dependencies = {
+            "nvim-telescope/telescope-file-browser.nvim",
+        },
         config = function()
             require("telescope").setup({
                 extensions = {
@@ -35,6 +44,9 @@ return {
                         }),
                     },
                     ["undo"] = {},
+                    ["file_browser"] = {
+                        hijack_netrw = true,
+                    },
                 },
                 pickers = {
                     colorscheme = {
@@ -53,6 +65,7 @@ return {
             })
             require("telescope").load_extension("ui-select")
             require("telescope").load_extension("undo")
+            require("telescope").load_extension("file_browser")
         end,
     },
     {
