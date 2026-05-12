@@ -81,6 +81,12 @@ return {
 
             vim.lsp.config("prismals", { capabilities = capabilities })
 
+            vim.lsp.config("sourcekit", {
+                capabilities = capabilities,
+                cmd = { "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/sourcekit-lsp" },
+                filetypes = { "swift", "objective-c", "objective-cpp" },
+            })
+
             vim.lsp.enable({
                 "clangd",
                 "lua_ls",
@@ -90,6 +96,7 @@ return {
                 "dartls",
                 "pyright",
                 "prismals",
+                "sourcekit",
             })
         end,
     },
@@ -106,6 +113,9 @@ return {
                     prettier = {
                         prepend_args = { "--tab-width", "4" },
                     },
+                    swift_format = {
+                        prepend_args = { "--configuration", vim.fn.expand("~/.swift-format") },
+                    },
                 },
                 formatters_by_ft = {
                     javascript = { "prettier" },
@@ -117,7 +127,8 @@ return {
                     json = { "prettier" },
                     yaml = { "prettier" },
                     markdown = { "prettier" },
-                    python = { "prettier" }
+                    python = { "prettier" },
+                    swift = { "swift_format" },
                 },
             })
 
