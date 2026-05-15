@@ -1,3 +1,5 @@
+vim.g.python3_host_prog = vim.fn.expand("~/.venv/neovim/bin/python")
+
 vim.g.mapleader = " "
 vim.opt.number = true
 vim.opt.relativenumber = true
