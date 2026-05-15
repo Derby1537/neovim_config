@@ -1,0 +1,32 @@
+font-size = 20
+font-feature = -liga
+font-feature = -ss20
+font-feature = -calt
+font-feature = -dlig
+# font-synthetic-style = true
+# adjust-cell-height = 47%
+
+cursor-style = block
+cursor-style-blink = true
+shell-integration-features = no-cursor
+
+fullscreen = true
+maximize = true
+
+theme = Catppuccin Frappe
+
+background-image-fit=cover
+background-image-opacity=0.05
+# background-image=./bg/Pikmin_4_1920x1080.jpg
+# background-image=./bg/Pikmin_Wallpaper_Rose_3840x2160.jpg
+# background-image=./bg/Pikmin_Wallpaper_Lily_3840x2160.jpg
+# background-image=./bg/wp2212912-pikmin-wallpapers.jpg
+background-image=./bg/Pikmin_4_Wallpaper_3840x2160.jpg
+
+window-padding-balance = true
+window-padding-x = 0
+window-padding-y = 0
+
+# laggy
+# custom-shader = ./shaders/bettercrt.glsl
+

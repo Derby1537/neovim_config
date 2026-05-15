@@ -2,3 +2,5 @@
 .luarc.json
 init2.lua
 usage_data.json
+ghostty/bg/*
+!ghostty/bg/.gitkeep
