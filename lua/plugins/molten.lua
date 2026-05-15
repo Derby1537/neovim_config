@@ -13,6 +13,7 @@ return {
     keys = {
         { "<leader>mi", ":MoltenInit<CR>",              desc = "Molten init" },
         { "<leader>me", ":MoltenEvaluateOperator<CR>",  desc = "Molten evaluate operator" },
+        { "<leader>me", ":<C-u>MoltenEvaluateVisual<CR>", mode = "v", desc = "Molten evaluate visual" },
         { "<leader>ml", ":MoltenEvaluateLine<CR>",      desc = "Molten evaluate line" },
         { "<leader>mc", ":MoltenReevaluateCell<CR>",    desc = "Molten reevaluate cell" },
         { "<leader>md", ":MoltenDelete<CR>",            desc = "Molten delete cell" },
